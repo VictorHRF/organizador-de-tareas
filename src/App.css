@@ -1,0 +1,44 @@
+#root {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .App {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .component {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+button {
+  font-size: 16px;
+  margin: 2px;
+  padding: 2px 4px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.timer {
+  font-size: 22px;
+}
+
+.etiqueta {
+  background-color: #333;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+}
+
+.item {
+  flex: 1;
+}
