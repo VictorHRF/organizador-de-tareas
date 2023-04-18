@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-export const Timer = ({initialTime}) => {
+export const Timer = ({time}) => {
+
     const [ejecutando, setEjecutando] = useState(false);
-    const [minuto, setMinuto] = useState( initialTime );
+    const [minuto, setMinuto] = useState( time );
     const [segundo, setSegundo] = useState(0);
-    const [editar, setEditar] = useState(false);
     
     useEffect(() => {
         if(!ejecutando) return;
@@ -14,7 +14,7 @@ export const Timer = ({initialTime}) => {
             setMinuto(minuto - 1);
             setSegundo(59);
         } else {
-            const timeout = setTimeout(() => setSegundo(segundo - 1), 100);
+            const timeout = setTimeout(() => setSegundo(segundo - 1), 1000);
             return () => clearTimeout(timeout);
         }
     }, [segundo])
@@ -32,36 +32,23 @@ export const Timer = ({initialTime}) => {
             setSegundo(segundo - 1);
         }
     }
+
+    function reiniciarTimer() {
+        setMinuto(time);
+        setSegundo(0);        
+        setEjecutando(false);
+    }
     
     return (
         <>
-        <div className='etiqueta'>
-            <div className='item'>
-                <h2>9:00 am</h2>
-            </div>
             <div className='item'>
                 <h1 className='timer'>{minuto.toString().padStart(2, '0')}:{segundo.toString().padStart(2, '0')}</h1>
             </div>
             <div className='item'>
                 <button onClick={() => iniciarTimer()}>Play</button>
                 <button onClick={() => detenerTimer()}>Stop</button>
-                <button onClick={() => detenerTimer()}>Restart</button>
-                <button onClick={() => setEditar(!editar)}>Editar</button>
+                <button onClick={() => reiniciarTimer()}>Restart</button>
             </div>
-        </div>
-        {
-            editar &&             
-            <form>
-                <label>
-                    Titulo: 
-                    <input type="text" />
-                </label>
-                <select name="hola" id="">
-                    <option value="25min">25 min</option>
-                    <option value="5min">5 min</option>
-                </select>
-            </form>        
-        }
         </>
     )
 }
